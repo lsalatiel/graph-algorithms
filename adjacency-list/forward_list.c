@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include "forward_list.h"
 
+struct ForwardList {
+    int size;
+    Node *head;
+};
+
 ForwardList* forward_list_construct() {
     ForwardList *l = malloc(sizeof(ForwardList));
     l->size = 0;

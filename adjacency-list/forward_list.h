@@ -3,10 +3,7 @@
 
 #include "node.h"
 
-typedef struct {
-    int size;
-    Node *head;
-} ForwardList;
+typedef struct ForwardList ForwardList;
 
 // cria uma lista
 ForwardList* forward_list_construct();
