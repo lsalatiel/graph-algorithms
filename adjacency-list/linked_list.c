@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "forward_list.h"
+#include "linked_list.h"
 
 typedef struct Node {
     int value;
@@ -20,13 +20,13 @@ void node_destroy(Node *n) {
     free(n);
 }
 
-struct ForwardList {
+struct LinkedList {
     int size;
     Node *head;
 };
 
-ForwardList* forward_list_construct() {
-    ForwardList *l = malloc(sizeof(ForwardList));
+LinkedList* linked_list_construct() {
+    LinkedList *l = malloc(sizeof(LinkedList));
     l->size = 0;
     l->head = NULL;
 
@@ -40,23 +40,23 @@ void node_destroy_recursive(Node *n) {
     free(n);
 }
 
-void forward_list_destroy(ForwardList* l) {
+void linked_list_destroy(LinkedList* l) {
     node_destroy_recursive(l->head);
     free(l);
 }
 
-int forward_list_size(ForwardList* l) {
+int linked_list_size(LinkedList* l) {
     return l->size;
 }
 
-void forward_list_push_front(ForwardList* l, int val) {
+void linked_list_push_front(LinkedList* l, int val) {
     Node *n = node_construct(val, l->head);
     l->head = n;
 
     l->size++;
 }
 
-void forward_list_print(ForwardList* l) {
+void linked_list_print(LinkedList* l) {
     Node *n = l->head;
     
     printf("[");
@@ -76,7 +76,7 @@ void forward_list_print(ForwardList* l) {
     l->size++;
 }
 
-void forward_list_remove(ForwardList* l, int val) {
+void linked_list_remove(LinkedList* l, int val) {
     if(l->head == NULL) return;
 
     Node *prev = NULL;
