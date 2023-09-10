@@ -2,6 +2,24 @@
 #include <stdlib.h>
 #include "forward_list.h"
 
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+Node *node_construct(int value, Node *next) {
+    Node *n = malloc(sizeof(Node));
+    
+    n->value = value;
+    n->next = next;
+
+    return n;
+}
+
+void node_destroy(Node *n) {
+    free(n);
+}
+
 struct ForwardList {
     int size;
     Node *head;
@@ -58,37 +76,6 @@ void forward_list_print(ForwardList* l) {
     l->size++;
 }
 
-int forward_list_get_recursive(Node *n, int i) {
-    if(i == 0)
-        return n->value;
-
-    return forward_list_get_recursive(n->next, i - 1);
-}
-
-int forward_list_get(ForwardList* l, int i) {
-    return forward_list_get_recursive(l->head, i);
-}
-
-int forward_list_pop_front(ForwardList* l) {
-    int removed = l->head->value;
-    l->head = l->head->next;
-    l->size--;
-
-    return removed;
-}
-
-ForwardList* forward_list_reverse(ForwardList* l) {
-    ForwardList *r = forward_list_construct();
-    
-    Node *curr = l->head;
-    while(curr != NULL) {
-        forward_list_push_front(r, curr->value);
-        curr = curr->next;
-    }
-
-    return r;
-}
-
 void forward_list_remove(ForwardList* l, int val) {
     if(l->head == NULL) return;
 
@@ -116,11 +103,3 @@ void forward_list_remove(ForwardList* l, int val) {
     }
 }
 
-void forward_list_cat(ForwardList* l, ForwardList* m) {
-    Node *curr = m->head;
-
-    while(curr != NULL) {
-        forward_list_push_front(l, curr->value);
-        curr = curr->next;
-    }
-}
