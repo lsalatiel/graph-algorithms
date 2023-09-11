@@ -65,7 +65,7 @@ int graph_num_vertices(Graph *g);
  *
  * @param g the graph to get the edges from
  */
-LinkedList **graph_adjacency_list(Graph *g) {
+LinkedList **graph_adjacency_list(Graph *g);
 
 /**
  * Print a graph.
