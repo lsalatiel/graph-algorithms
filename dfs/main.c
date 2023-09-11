@@ -19,4 +19,8 @@ int main() {
     for (int i = 0; i < graph_num_vertices(g); i++) {
         printf("%d ", path[i]);
     }
+
+    graph_destroy(g);
+
+    free(path);
 }
