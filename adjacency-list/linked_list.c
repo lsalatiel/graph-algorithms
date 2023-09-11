@@ -25,6 +25,10 @@ struct LinkedList {
     Node *head;
 };
 
+struct ListIterator {
+    Node *current;
+};
+
 LinkedList* linked_list_construct() {
     LinkedList *l = malloc(sizeof(LinkedList));
     l->size = 0;
@@ -103,3 +107,25 @@ void linked_list_remove(LinkedList* l, int val) {
     }
 }
 
+ListIterator *list_iterator_construct(LinkedList *l) {
+    ListIterator *it = malloc(sizeof(ListIterator));
+
+    it->current = l->head;
+
+    return it;
+}
+
+void list_iterator_free(ListIterator *it) {
+    free(it);
+}
+
+int list_iterator_next(ListIterator *it) {
+    int value = it->current->value;
+    it->current = it->current->next;
+
+    return value;
+}
+
+bool list_iterator_is_over(ListIterator *it) {
+    return (it->current == NULL);
+}

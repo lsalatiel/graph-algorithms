@@ -1,7 +1,11 @@
 #ifndef _LINKED_LIST_H_
 #define _LINKED_LIST_H_
 
+#include <stdbool.h>
+
 typedef struct LinkedList LinkedList;
+
+typedef struct ListIterator ListIterator;
 
 // cria uma lista
 LinkedList* linked_list_construct();
@@ -20,5 +24,13 @@ void linked_list_destroy(LinkedList* l);
 
 // remove todas as ocorrências de um valor da lista
 void linked_list_remove(LinkedList* l, int val);
+
+ListIterator *list_iterator_construct(LinkedList *l);
+
+void list_iterator_free(ListIterator *it);
+
+int list_iterator_next(ListIterator *it);
+
+bool list_iterator_is_over(ListIterator *it);
 
 #endif
