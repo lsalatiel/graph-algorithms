@@ -1,4 +1,5 @@
 #include "graph.h"
+#include "linked_list.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -62,6 +63,10 @@ void remove_directed_edge(Graph *g, int p, int q) {
 
 int graph_num_vertices(Graph *g) {
     return g->num_vertices;
+}
+
+LinkedList **graph_adjacency_list(Graph *g) {
+    return g->adjacency_list;
 }
 
 void graph_print(Graph *g) {

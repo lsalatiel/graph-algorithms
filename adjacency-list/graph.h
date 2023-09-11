@@ -61,6 +61,13 @@ void remove_directed_edge(Graph *g, int p, int q);
 int graph_num_vertices(Graph *g);
 
 /**
+ * Return the edges of a graph as an adjacency matrix.
+ *
+ * @param g the graph to get the edges from
+ */
+LinkedList **graph_adjacency_list(Graph *g) {
+
+/**
  * Print a graph.
  *
  * @param g the graph to be printed
