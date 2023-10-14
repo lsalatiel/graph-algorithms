@@ -4,9 +4,25 @@
 
 typedef struct Node {
     int value;
+#ifdef WEIGHTED
+    double weight;
+#endif
     struct Node *next;
 } Node;
 
+
+#ifdef WEIGHTED
+Node *node_construct(int value, double weight, Node *next) {
+    Node *n = malloc(sizeof(Node));
+    
+    n->value = value;
+    n->weight = weight;
+    n->next = next;
+
+    return n;
+}
+
+#else
 Node *node_construct(int value, Node *next) {
     Node *n = malloc(sizeof(Node));
     
@@ -15,6 +31,7 @@ Node *node_construct(int value, Node *next) {
 
     return n;
 }
+#endif
 
 void node_destroy(Node *n) {
     free(n);
@@ -53,12 +70,22 @@ int linked_list_size(LinkedList* l) {
     return l->size;
 }
 
+#ifdef WEIGHTED
+void linked_list_push_front(LinkedList* l, int val, double weight) {
+    Node *n = node_construct(val, weight, l->head);
+    l->head = n;
+
+    l->size++;
+}
+
+#else
 void linked_list_push_front(LinkedList* l, int val) {
     Node *n = node_construct(val, l->head);
     l->head = n;
 
     l->size++;
 }
+#endif
 
 void linked_list_print(LinkedList* l) {
     Node *n = l->head;
@@ -66,7 +93,11 @@ void linked_list_print(LinkedList* l) {
     printf("[");
     int i = 0;
     while(n != NULL) {
+#ifdef WEIGHTED
+        printf("%d, %lf", n->value, n->weight);
+#else
         printf("%d", n->value);
+#endif
         if(i != l->size - 1)
             printf(", ");
         

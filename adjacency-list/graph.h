@@ -21,6 +21,13 @@ Graph *graph_construct(int num_vertices);
  */
 void graph_destroy(Graph *g);
 
+#ifdef WEIGHTED
+void graph_add_undirected_edge(Graph *g, int p, int q, double weight);
+
+void graph_add_directed_edge(Graph *g, int p, int q, double weight);
+
+#else
+
 /**
  * Add an edge to a graph.
  *
@@ -36,6 +43,7 @@ void graph_add_undirected_edge(Graph *g, int p, int q);
  * @param p,q the edge (p,q) to be added - from p to q
  */
 void graph_add_directed_edge(Graph *g, int p, int q);
+#endif
 
 /**
  * Remove an edge from a graph.

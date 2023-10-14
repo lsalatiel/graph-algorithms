@@ -14,7 +14,11 @@ LinkedList* linked_list_construct();
 int linked_list_size(LinkedList* l);
 
 // adiciona um item no início da lista
+#ifdef WEIGHTED
+void linked_list_push_front(LinkedList* l, int val, double weight);
+#else
 void linked_list_push_front(LinkedList* l, int val);
+#endif
 
 // mostra a lista na tela
 void linked_list_print(LinkedList* l);

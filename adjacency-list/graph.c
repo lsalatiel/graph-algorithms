@@ -31,6 +31,22 @@ void graph_destroy(Graph *g) {
     free(g);
 }
 
+#ifdef WEIGHTED
+void graph_add_undirected_edge(Graph *g, int p, int q, double weight) {
+    if(p < 0 || p >= g->num_vertices || q < 0 || q >= g->num_vertices)
+        return;
+
+    linked_list_push_front(g->adjacency_list[p], q, weight);
+    linked_list_push_front(g->adjacency_list[q], p, weight);
+}
+
+void graph_add_directed_edge(Graph *g, int p, int q, double weight) {
+    if(p < 0 || p >= g->num_vertices || q < 0 || q >= g->num_vertices)
+        return;
+
+    linked_list_push_front(g->adjacency_list[p], q, weight);
+}
+#else
 void graph_add_undirected_edge(Graph *g, int p, int q) {
     if(p < 0 || p >= g->num_vertices || q < 0 || q >= g->num_vertices)
         return;
@@ -45,6 +61,7 @@ void graph_add_directed_edge(Graph *g, int p, int q) {
 
     linked_list_push_front(g->adjacency_list[p], q);
 }
+#endif
 
 void graph_remove_undirected_edge(Graph *g, int p, int q) {
     if(p < 0 || p >= g->num_vertices || q < 0 || q >= g->num_vertices)

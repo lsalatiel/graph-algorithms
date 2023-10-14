@@ -1,4 +1,9 @@
+CC = gcc
+override CFLAGS += -Wall -Wextra -g
+MAIN = main
+EXEC = *.c
+
 all:
-	gcc -Wall -g -o main *.c
+	$(CC) $(CFLAGS) -o $(MAIN) $(EXEC)
 clean:
-	rm -f main
+	rm -f $(MAIN)
