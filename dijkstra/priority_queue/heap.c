@@ -40,28 +40,9 @@ void __heap_swap(Heap *h, int i, int j) {
 
     h->map[h->data[i]] = i;
     h->map[h->data[j]] = j;
-
-    /* int tmp = h->data[i]; */
-    /* h->data[i] = h->data[j]; */
-    /* h->data[j] = tmp; */
-    /*  */
-    /* double tmp2 = h->priority[i]; */
-    /* h->priority[i] = h->priority[j]; */
-    /* h->priority[j] = tmp2; */
 }
 
 void __heapify_up(Heap *h, int i) {
-    /* while(i) { */
-    /*     int parent = (i - 1) / 2; */
-    /*  */
-    /*     if(h->priority[parent] > h->priority[i]) { */
-    /*         __heap_swap(h, h->data[parent], h->data[i]); */
-    /*         i = parent; */
-    /*     } */
-    /*     else */
-    /*         break; */
-    /* } */
-
     int parent = (i - 1) / 2;
 
     if(h->priority[parent] > h->priority[i]) {
@@ -71,28 +52,8 @@ void __heapify_up(Heap *h, int i) {
 }
 
 void __heapify_down(Heap *h, int i) {
-    /* while(i < h->size) { */
-    /*     int left = 2 * i + 1; */
-    /*     int right = 2 * i + 2; */
-    /*  */
-    /*     if(left >= h->size) */
-    /*         break; */
-    /*  */
-    /*     int min = left; */
-    /*     if(right < h->size && h->priority[right] < h->priority[left]) */
-    /*         min = right; */
-    /*  */
-    /*     if(h->priority[i] > h->priority[min]) { */
-    /*         __heap_swap(h, h->data[i], h->data[min]); */
-    /*         i = min; */
-    /*     } */
-    /*     else */
-    /*         break; */
-    /* } */
-
-
-    int left = i * 2 + 1;
-    int right = i * 2 + 2;
+    int left = (i >> 2) + 1;
+    int right = (i >> 2) + 2;
     int min = i;
 
     if(left >= 0 && left < h->size && h->priority[left] < h->priority[i])
