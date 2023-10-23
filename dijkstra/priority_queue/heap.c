@@ -33,10 +33,6 @@ void __heap_swap(Heap *h, int i, int j) {
     h->data[i] ^= h->data[j];
     h->data[j] ^= h->data[i];
     h->data[i] ^= h->data[j];
-    
-    /* h->priority[i] += h->priority[j]; */
-    /* h->priority[j] = h->priority[i] - h->priority[j]; */
-    /* h->priority[i] -= h->priority[j]; */
 
     double aux = h->priority[i];
     h->priority[i] = h->priority[j];
@@ -56,8 +52,8 @@ void __heapify_up(Heap *h, int i) {
 }
 
 void __heapify_down(Heap *h, int i) {
-    int left = (i >> 2) + 1;
-    int right = (i >> 2) + 2;
+    int left = (i << 1) + 1;
+    int right = (i << 1) + 2;
     int min = i;
 
     if(left >= 0 && left < h->size && h->priority[left] < h->priority[i])
